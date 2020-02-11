@@ -51,18 +51,17 @@ class HashTable:
 
         Fill this in.
         '''
-        index = self._hash_mod(key)
-
-        if self.storage[index] is not None:
-            self.storage[index] = LinkedPair(key, value)
+        hashed_key = self._hash_mod(key)
+        if self.storage[hashed_key] is None:
+            self.storage[hashed_key] = LinkedPair(key , value)
         else:
-            node = self.storage[index]
+            node = self.storage[hashed_key]
             while node and node.key != key:
                 prev, node = node, node.next
             if node:
                 node.value = value
             else:
-                prev.next = LinkedPair(key, value)
+               prev.next =  LinkedPair(key , value)
 
 
 
@@ -96,7 +95,13 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        index = self._hash_mod(key)
+        node = self.storage[index]
+        if not node:
+            return None
+        while node and node.key != key:
+            node = node.next
+        return node.value
 
 
     def resize(self):
