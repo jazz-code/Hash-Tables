@@ -111,7 +111,13 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        # Double the size of capacity
+        new_bucket = [None] * self.capacity * 2
+        # Iterate through capacity
+        for i in range(self.capacity):
+            # Rehash all in hash table
+            new_bucket[i] = self.storage[i]
+        self.storage = new_bucket
 
 
 
