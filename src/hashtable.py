@@ -51,7 +51,18 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        index = self._hash_mod(key)
+
+        if self.storage[index] is not None:
+            self.storage[index] = LinkedPair(key, value)
+        else:
+            node = self.storage[index]
+            while node and node.key != key:
+                prev, node = node, node.next
+            if node:
+                node.value = value
+            else:
+                prev.next = LinkedPair(key, value)
 
 
 
@@ -63,7 +74,7 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+
 
 
     def retrieve(self, key):
